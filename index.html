@@ -3,175 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MNQ and NQ Risk Calculator</title>
+    <title>MNQ & NQ Risk Calculator</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #00bcd4, #4caf50);
-            color: white;
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             text-align: center;
-            padding: 50px 0;
         }
-
         h1 {
+            color: #ffffff;
             font-size: 2.5em;
             margin-bottom: 30px;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-
-        .calculator {
-            background: rgba(0, 0, 0, 0.6);
+        .calculator-container {
+            background-color: #1f1f1f;
+            padding: 20px;
             border-radius: 10px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         }
-
-        .calculator input {
+        input, select {
+            background-color: #333;
+            border: 1px solid #444;
+            color: #e0e0e0;
             padding: 10px;
-            width: 100%;
             margin: 10px 0;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            background-color: #fff;
-            color: #333;
-        }
-
-        .calculator button {
-            background-color: #4caf50;
-            color: white;
-            font-size: 1.5em;
-            padding: 15px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
             width: 100%;
-            transition: background-color 0.3s ease;
+            border-radius: 5px;
         }
-
-        .calculator button:hover {
-            background-color: #45a049;
+        button {
+            background-color: #6200ea;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
         }
-
+        button:hover {
+            background-color: #3700b3;
+        }
         .result {
-            font-size: 1.5em;
-            font-weight: bold;
             margin-top: 20px;
-            color: #ffeb3b;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #76ff03;
         }
-
-        .section-divider {
-            margin: 50px 0;
-            border-top: 2px solid #fff;
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-            .calculator {
-                padding: 20px;
-                width: 90%;
-            }
+        .total-risk {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #f44336;
         }
     </style>
-    <script>
-        function calculateMNQ() {
-            const accountBalance = parseFloat(document.getElementById("accountBalanceMNQ").value);
-            const riskPercentage = parseFloat(document.getElementById("riskPercentageMNQ").value);
-            const pointRisk = parseFloat(document.getElementById("pointRiskMNQ").value);
-            if (isNaN(accountBalance) || isNaN(riskPercentage) || isNaN(pointRisk)) {
-                document.getElementById("resultMNQ").textContent = "Please enter valid values.";
-                return;
-            }
-
-            const riskAmount = (accountBalance * (riskPercentage / 100));
-            let contracts = riskAmount / (pointRisk * 2); // MNQ = $2 per point
-
-            // Apply custom rounding logic
-            if (contracts < 1) {
-                contracts = 0;
-            } else if (contracts % 1 >= 0.8) {
-                contracts = Math.ceil(contracts);
-            } else {
-                contracts = Math.floor(contracts);
-            }
-
-            const totalRisk = contracts * pointRisk * 2; // Total Risk = contracts * pointRisk * $2 for MNQ
-
-            document.getElementById("resultMNQ").textContent = "Contracts to use for MNQ: " + contracts;
-            document.getElementById("totalRiskMNQ").textContent = "Total Risk: $" + totalRisk.toFixed(2);
-        }
-
-        function calculateNQ() {
-            const accountBalance = parseFloat(document.getElementById("accountBalanceNQ").value);
-            const riskPercentage = parseFloat(document.getElementById("riskPercentageNQ").value);
-            const pointRisk = parseFloat(document.getElementById("pointRiskNQ").value);
-            if (isNaN(accountBalance) || isNaN(riskPercentage) || isNaN(pointRisk)) {
-                document.getElementById("resultNQ").textContent = "Please enter valid values.";
-                return;
-            }
-
-            const riskAmount = (accountBalance * (riskPercentage / 100));
-            let contracts = riskAmount / (pointRisk * 20); // NQ = $20 per point
-
-            // Apply custom rounding logic
-            if (contracts < 1) {
-                contracts = 0;
-            } else if (contracts % 1 >= 0.8) {
-                contracts = Math.ceil(contracts);
-            } else {
-                contracts = Math.floor(contracts);
-            }
-
-            const totalRisk = contracts * pointRisk * 20; // Total Risk = contracts * pointRisk * $20 for NQ
-
-            document.getElementById("resultNQ").textContent = "Contracts to use for NQ: " + contracts;
-            document.getElementById("totalRiskNQ").textContent = "Total Risk: $" + totalRisk.toFixed(2);
-        }
-    </script>
 </head>
 <body>
 
-    <h1>MNQ Risk Calculator</h1>
-    <div class="calculator">
-        <label for="accountBalanceMNQ">Account Balance ($):</label>
-        <input type="number" id="accountBalanceMNQ" placeholder="Enter Account Balance">
-        <br>
-        <label for="riskPercentageMNQ">Risk Percentage (%):</label>
-        <input type="number" id="riskPercentageMNQ" placeholder="Enter Risk Percentage">
-        <br>
-        <label for="pointRiskMNQ">Point Risk (Points):</label>
-        <input type="number" id="pointRiskMNQ" placeholder="Enter Point Risk">
-        <br><br>
+    <h1>MNQ & NQ Risk Calculator</h1>
+
+    <!-- MNQ Calculator -->
+    <div class="calculator-container">
+        <h2>MNQ Risk Calculator</h2>
+        <input type="number" id="accountBalanceMNQ" placeholder="Account Balance ($)" required>
+        <input type="number" id="riskPercentageMNQ" placeholder="Risk Percentage (%)" required>
+        <input type="number" id="pointRiskMNQ" placeholder="Point Risk (MNQ)" required>
         <button onclick="calculateMNQ()">Calculate MNQ Contracts</button>
-        <p id="resultMNQ" class="result"></p>
-        <p id="totalRiskMNQ" class="result"></p>
+        <div class="result" id="resultMNQ"></div>
+        <div class="total-risk" id="totalRiskMNQ"></div>
     </div>
 
-    <div class="section-divider"></div>
+    <hr>
 
-    <h1>NQ Risk Calculator</h1>
-    <div class="calculator">
-        <label for="accountBalanceNQ">Account Balance ($):</label>
-        <input type="number" id="accountBalanceNQ" placeholder="Enter Account Balance">
-        <br>
-        <label for="riskPercentageNQ">Risk Percentage (%):</label>
-        <input type="number" id="riskPercentageNQ" placeholder="Enter Risk Percentage">
-        <br>
-        <label for="pointRiskNQ">Point Risk (Points):</label>
-        <input type="number" id="pointRiskNQ" placeholder="Enter Point Risk">
-        <br><br>
+    <!-- NQ Calculator -->
+    <div class="calculator-container">
+        <h2>NQ Risk Calculator</h2>
+        <input type="number" id="accountBalanceNQ" placeholder="Account Balance ($)" required>
+        <input type="number" id="riskPercentageNQ" placeholder="Risk Percentage (%)" required>
+        <input type="number" id="pointRiskNQ" placeholder="Point Risk (NQ)" required>
         <button onclick="calculateNQ()">Calculate NQ Contracts</button>
-        <p id="resultNQ" class="result"></p>
-        <p id="totalRiskNQ" class="result"></p>
+        <div class="result" id="resultNQ"></div>
+        <div class="total-risk" id="totalRiskNQ"></div>
     </div>
+
+    <script>
+        function calculateMNQ() {
+            var accountBalance = parseFloat(document.getElementById('accountBalanceMNQ').value);
+            var riskPercentage = parseFloat(document.getElementById('riskPercentageMNQ').value);
+            var pointRisk = parseFloat(document.getElementById('pointRiskMNQ').value);
+            var riskAmount = (accountBalance * riskPercentage) / 100;
+            var contractValue = 2; // $2 per point for MNQ
+            var contracts = riskAmount / (pointRisk * contractValue);
+            
+            // Round to the nearest lower number
+            contracts = Math.floor(contracts);
+            if (contracts < 1) contracts = 0; // Ensure no fractional contracts below 1
+            
+            document.getElementById('resultMNQ').innerText = "MNQ Contracts: " + contracts;
+            document.getElementById('totalRiskMNQ').innerText = "Total Risk: $" + riskAmount.toFixed(2);
+        }
+
+        function calculateNQ() {
+            var accountBalance = parseFloat(document.getElementById('accountBalanceNQ').value);
+            var riskPercentage = parseFloat(document.getElementById('riskPercentageNQ').value);
+            var pointRisk = parseFloat(document.getElementById('pointRiskNQ').value);
+            var riskAmount = (accountBalance * riskPercentage) / 100;
+            var contractValue = 20; // $20 per point for NQ
+            var contracts = riskAmount / (pointRisk * contractValue);
+
+            // Round to the nearest lower number
+            if (contracts < 1) {
+                contracts = 0; // Show 0 if contract value is less than 1
+            } else if (contracts >= 1 && contracts < 2) {
+                contracts = 1;
+            } else {
+                contracts = Math.round(contracts); // Round to the nearest whole number
+            }
+
+            document.getElementById('resultNQ').innerText = "NQ Contracts: " + contracts;
+            document.getElementById('totalRiskNQ').innerText = "Total Risk: $" + riskAmount.toFixed(2);
+        }
+    </script>
 
 </body>
 </html>
