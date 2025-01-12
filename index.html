@@ -15,8 +15,8 @@
             }
 
             const riskAmount = (accountBalance * (riskPercentage / 100));
-            const contracts = riskAmount / (pointRisk * 2); // MNQ = $2 per point
-            document.getElementById("resultMNQ").textContent = "Contracts to use for MNQ: " + contracts.toFixed(2);
+            const contracts = Math.round(riskAmount / (pointRisk * 2)); // MNQ = $2 per point, round to nearest contract
+            document.getElementById("resultMNQ").textContent = "Contracts to use for MNQ: " + contracts;
         }
 
         function calculateNQ() {
@@ -29,8 +29,8 @@
             }
 
             const riskAmount = (accountBalance * (riskPercentage / 100));
-            const contracts = riskAmount / (pointRisk * 20); // NQ = $20 per point
-            document.getElementById("resultNQ").textContent = "Contracts to use for NQ: " + contracts.toFixed(2);
+            const contracts = Math.round(riskAmount / (pointRisk * 20)); // NQ = $20 per point, round to nearest contract
+            document.getElementById("resultNQ").textContent = "Contracts to use for NQ: " + contracts;
         }
     </script>
 </head>
