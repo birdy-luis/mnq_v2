@@ -95,16 +95,12 @@
             let contracts = riskAmount / (pointRisk * 2); // MNQ = $2 per point
 
             // Apply custom rounding logic
-            contracts = Math.floor(contracts);
             if (contracts < 1) {
                 contracts = 0;
+            } else if (contracts % 1 >= 0.8) {
+                contracts = Math.ceil(contracts);
             } else {
-                const remainder = contracts % 1;
-                if (remainder < 0.8) {
-                    contracts = Math.floor(contracts);
-                } else {
-                    contracts = Math.ceil(contracts);
-                }
+                contracts = Math.floor(contracts);
             }
 
             document.getElementById("resultMNQ").textContent = "Contracts to use for MNQ: " + contracts;
@@ -123,16 +119,12 @@
             let contracts = riskAmount / (pointRisk * 20); // NQ = $20 per point
 
             // Apply custom rounding logic
-            contracts = Math.floor(contracts);
             if (contracts < 1) {
                 contracts = 0;
+            } else if (contracts % 1 >= 0.8) {
+                contracts = Math.ceil(contracts);
             } else {
-                const remainder = contracts % 1;
-                if (remainder < 0.8) {
-                    contracts = Math.floor(contracts);
-                } else {
-                    contracts = Math.ceil(contracts);
-                }
+                contracts = Math.floor(contracts);
             }
 
             document.getElementById("resultNQ").textContent = "Contracts to use for NQ: " + contracts;
