@@ -4,6 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MNQ and NQ Risk Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #00bcd4, #4caf50);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .calculator {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .calculator input {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .calculator button {
+            background-color: #4caf50;
+            color: white;
+            font-size: 1.5em;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ffeb3b;
+        }
+
+        .section-divider {
+            margin: 50px 0;
+            border-top: 2px solid #fff;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .calculator {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
     <script>
         function calculateMNQ() {
             const accountBalance = parseFloat(document.getElementById("accountBalanceMNQ").value);
@@ -63,32 +140,38 @@
     </script>
 </head>
 <body>
-    <h1>MNQ Risk Calculator</h1>
-    <label for="accountBalanceMNQ">Account Balance ($):</label>
-    <input type="number" id="accountBalanceMNQ" placeholder="Enter Account Balance">
-    <br>
-    <label for="riskPercentageMNQ">Risk Percentage (%):</label>
-    <input type="number" id="riskPercentageMNQ" placeholder="Enter Risk Percentage">
-    <br>
-    <label for="pointRiskMNQ">Point Risk (Points):</label>
-    <input type="number" id="pointRiskMNQ" placeholder="Enter Point Risk">
-    <br><br>
-    <button onclick="calculateMNQ()">Calculate MNQ Contracts</button>
-    <p id="resultMNQ"></p>
 
-    <hr>
+    <h1>MNQ Risk Calculator</h1>
+    <div class="calculator">
+        <label for="accountBalanceMNQ">Account Balance ($):</label>
+        <input type="number" id="accountBalanceMNQ" placeholder="Enter Account Balance">
+        <br>
+        <label for="riskPercentageMNQ">Risk Percentage (%):</label>
+        <input type="number" id="riskPercentageMNQ" placeholder="Enter Risk Percentage">
+        <br>
+        <label for="pointRiskMNQ">Point Risk (Points):</label>
+        <input type="number" id="pointRiskMNQ" placeholder="Enter Point Risk">
+        <br><br>
+        <button onclick="calculateMNQ()">Calculate MNQ Contracts</button>
+        <p id="resultMNQ" class="result"></p>
+    </div>
+
+    <div class="section-divider"></div>
 
     <h1>NQ Risk Calculator</h1>
-    <label for="accountBalanceNQ">Account Balance ($):</label>
-    <input type="number" id="accountBalanceNQ" placeholder="Enter Account Balance">
-    <br>
-    <label for="riskPercentageNQ">Risk Percentage (%):</label>
-    <input type="number" id="riskPercentageNQ" placeholder="Enter Risk Percentage">
-    <br>
-    <label for="pointRiskNQ">Point Risk (Points):</label>
-    <input type="number" id="pointRiskNQ" placeholder="Enter Point Risk">
-    <br><br>
-    <button onclick="calculateNQ()">Calculate NQ Contracts</button>
-    <p id="resultNQ"></p>
+    <div class="calculator">
+        <label for="accountBalanceNQ">Account Balance ($):</label>
+        <input type="number" id="accountBalanceNQ" placeholder="Enter Account Balance">
+        <br>
+        <label for="riskPercentageNQ">Risk Percentage (%):</label>
+        <input type="number" id="riskPercentageNQ" placeholder="Enter Risk Percentage">
+        <br>
+        <label for="pointRiskNQ">Point Risk (Points):</label>
+        <input type="number" id="pointRiskNQ" placeholder="Enter Point Risk">
+        <br><br>
+        <button onclick="calculateNQ()">Calculate NQ Contracts</button>
+        <p id="resultNQ" class="result"></p>
+    </div>
+
 </body>
 </html>
