@@ -3,99 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Risk Management Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 10px;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        .container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        label {
-            font-weight: bold;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Risk Calculator</h1>
-        <label for="accountBalance">Account Balance ($):</label>
-        <input type="number" id="accountBalance" placeholder="Enter account balance" required>
-
-        <label for="riskPercentage">Risk Percentage (%):</label>
-        <input type="number" id="riskPercentage" placeholder="Enter risk percentage" required>
-
-        <label for="pointRisk">Point Risk:</label>
-        <input type="number" id="pointRisk" placeholder="Enter point risk" required>
-
-        <button onclick="calculateContracts()">Calculate Contracts</button>
-
-        <div class="result" id="result">Total Contracts: </div>
-    </div>
-
+    <title>MNQ and NQ Risk Calculator</title>
     <script>
-        function calculateContracts() {
-            // Get user inputs
-            const accountBalance = parseFloat(document.getElementById("accountBalance").value);
-            const riskPercentage = parseFloat(document.getElementById("riskPercentage").value) / 100;
-            const pointRisk = parseFloat(document.getElementById("pointRisk").value);
-
-            // Validate inputs
+        function calculateMNQ() {
+            const accountBalance = parseFloat(document.getElementById("accountBalanceMNQ").value);
+            const riskPercentage = parseFloat(document.getElementById("riskPercentageMNQ").value);
+            const pointRisk = parseFloat(document.getElementById("pointRiskMNQ").value);
             if (isNaN(accountBalance) || isNaN(riskPercentage) || isNaN(pointRisk)) {
-                document.getElementById("result").textContent = "Please fill in all fields with valid numbers.";
+                document.getElementById("resultMNQ").textContent = "Please enter valid values.";
                 return;
             }
 
-            // Calculate total risk in dollars
-            const totalRisk = accountBalance * riskPercentage;
+            const riskAmount = (accountBalance * (riskPercentage / 100));
+            const contracts = riskAmount / (pointRisk * 2); // MNQ = $2 per point
+            document.getElementById("resultMNQ").textContent = "Contracts to use for MNQ: " + contracts.toFixed(2);
+        }
 
-            // Calculate risk per contract in dollars
-            const riskPerContract = pointRisk * 2; // $2 per point move
+        function calculateNQ() {
+            const accountBalance = parseFloat(document.getElementById("accountBalanceNQ").value);
+            const riskPercentage = parseFloat(document.getElementById("riskPercentageNQ").value);
+            const pointRisk = parseFloat(document.getElementById("pointRiskNQ").value);
+            if (isNaN(accountBalance) || isNaN(riskPercentage) || isNaN(pointRisk)) {
+                document.getElementById("resultNQ").textContent = "Please enter valid values.";
+                return;
+            }
 
-            // Calculate number of contracts
-            const totalContracts = Math.floor(totalRisk / riskPerContract);
-
-            // Display result
-            document.getElementById("result").textContent = `Total Contracts: ${totalContracts}`;
+            const riskAmount = (accountBalance * (riskPercentage / 100));
+            const contracts = riskAmount / (pointRisk * 20); // NQ = $20 per point
+            document.getElementById("resultNQ").textContent = "Contracts to use for NQ: " + contracts.toFixed(2);
         }
     </script>
+</head>
+<body>
+    <h1>MNQ Risk Calculator</h1>
+    <label for="accountBalanceMNQ">Account Balance ($):</label>
+    <input type="number" id="accountBalanceMNQ" placeholder="Enter Account Balance">
+    <br>
+    <label for="riskPercentageMNQ">Risk Percentage (%):</label>
+    <input type="number" id="riskPercentageMNQ" placeholder="Enter Risk Percentage">
+    <br>
+    <label for="pointRiskMNQ">Point Risk (Points):</label>
+    <input type="number" id="pointRiskMNQ" placeholder="Enter Point Risk">
+    <br><br>
+    <button onclick="calculateMNQ()">Calculate MNQ Contracts</button>
+    <p id="resultMNQ"></p>
+
+    <hr>
+
+    <h1>NQ Risk Calculator</h1>
+    <label for="accountBalanceNQ">Account Balance ($):</label>
+    <input type="number" id="accountBalanceNQ" placeholder="Enter Account Balance">
+    <br>
+    <label for="riskPercentageNQ">Risk Percentage (%):</label>
+    <input type="number" id="riskPercentageNQ" placeholder="Enter Risk Percentage">
+    <br>
+    <label for="pointRiskNQ">Point Risk (Points):</label>
+    <input type="number" id="pointRiskNQ" placeholder="Enter Point Risk">
+    <br><br>
+    <button onclick="calculateNQ()">Calculate NQ Contracts</button>
+    <p id="resultNQ"></p>
 </body>
 </html>
