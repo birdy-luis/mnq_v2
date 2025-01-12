@@ -103,7 +103,10 @@
                 contracts = Math.floor(contracts);
             }
 
+            const totalRisk = contracts * pointRisk * 2; // Total Risk = contracts * pointRisk * $2 for MNQ
+
             document.getElementById("resultMNQ").textContent = "Contracts to use for MNQ: " + contracts;
+            document.getElementById("totalRiskMNQ").textContent = "Total Risk: $" + totalRisk.toFixed(2);
         }
 
         function calculateNQ() {
@@ -127,7 +130,10 @@
                 contracts = Math.floor(contracts);
             }
 
+            const totalRisk = contracts * pointRisk * 20; // Total Risk = contracts * pointRisk * $20 for NQ
+
             document.getElementById("resultNQ").textContent = "Contracts to use for NQ: " + contracts;
+            document.getElementById("totalRiskNQ").textContent = "Total Risk: $" + totalRisk.toFixed(2);
         }
     </script>
 </head>
@@ -146,6 +152,7 @@
         <br><br>
         <button onclick="calculateMNQ()">Calculate MNQ Contracts</button>
         <p id="resultMNQ" class="result"></p>
+        <p id="totalRiskMNQ" class="result"></p>
     </div>
 
     <div class="section-divider"></div>
@@ -163,6 +170,7 @@
         <br><br>
         <button onclick="calculateNQ()">Calculate NQ Contracts</button>
         <p id="resultNQ" class="result"></p>
+        <p id="totalRiskNQ" class="result"></p>
     </div>
 
 </body>
