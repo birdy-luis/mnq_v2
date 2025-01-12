@@ -107,8 +107,11 @@
             contracts = Math.floor(contracts);
             if (contracts < 1) contracts = 0; // Ensure no fractional contracts below 1
             
+            // Calculate total risk
+            var totalRisk = contracts * pointRisk * contractValue;
+
             document.getElementById('resultMNQ').innerText = "MNQ Contracts: " + contracts;
-            document.getElementById('totalRiskMNQ').innerText = "Total Risk: $" + riskAmount.toFixed(2);
+            document.getElementById('totalRiskMNQ').innerText = "Total Risk: $" + totalRisk.toFixed(2);
         }
 
         function calculateNQ() {
@@ -128,8 +131,11 @@
                 contracts = Math.round(contracts); // Round to the nearest whole number
             }
 
+            // Calculate total risk
+            var totalRisk = contracts * pointRisk * contractValue;
+
             document.getElementById('resultNQ').innerText = "NQ Contracts: " + contracts;
-            document.getElementById('totalRiskNQ').innerText = "Total Risk: $" + riskAmount.toFixed(2);
+            document.getElementById('totalRiskNQ').innerText = "Total Risk: $" + totalRisk.toFixed(2);
         }
     </script>
 
